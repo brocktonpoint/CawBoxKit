@@ -25,6 +25,23 @@ SOFTWARE.
 import UIKit
 import XCTest
 
-class CawBoxKitTests: XCTestCase {
-    
+class KeychainTests: XCTestCase {
+
+    func testGenericPassword () {
+        let transaction = KeychainTransaction (
+            request: .GenericPassword,
+            service: "CawBoxKit",
+            attribute: "GenericPasswordTest"
+        )
+        
+        let stringValue = "Password12345"
+        let dataValue = stringValue.dataUsingEncoding (NSUTF8StringEncoding, allowLossyConversion: false)
+        XCTAssert (transaction.set (dataValue), "Failed to set generic password.")
+        
+        let fetchedData = transaction.data
+        XCTAssert (dataValue == fetchedData, "Failed to fetch generic password.")
+        
+        XCTAssert (transaction.delete (), "Failed to delete generic password.")
+    }
+
 }

@@ -11,6 +11,9 @@
 		033A92FF1B62CD9F003A5AEE /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE7DFF1B62C3F7004A380C /* String.swift */; };
 		033A93001B62CD9F003A5AEE /* Dispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE7E011B62C911004A380C /* Dispatch.swift */; };
 		033A93011B62CD9F003A5AEE /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE7E031B62CADB004A380C /* UIColor.swift */; };
+		033A93031B62D93B003A5AEE /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033A93021B62D93B003A5AEE /* Keychain.swift */; };
+		033A93051B62DDF6003A5AEE /* KeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033A93041B62DDF6003A5AEE /* KeychainTests.swift */; };
+		033A93061B62DE72003A5AEE /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033A93021B62D93B003A5AEE /* Keychain.swift */; };
 		03CE7DE81B62C3B6004A380C /* CawBoxKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 03CE7DE71B62C3B6004A380C /* CawBoxKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		03CE7DEE1B62C3B6004A380C /* CawBoxKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03CE7DE21B62C3B6004A380C /* CawBoxKit.framework */; };
 		03CE7DF51B62C3B6004A380C /* CawBoxKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE7DF41B62C3B6004A380C /* CawBoxKitTests.swift */; };
@@ -31,6 +34,8 @@
 
 /* Begin PBXFileReference section */
 		033A92FD1B62CC82003A5AEE /* UIColorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorTests.swift; sourceTree = "<group>"; };
+		033A93021B62D93B003A5AEE /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		033A93041B62DDF6003A5AEE /* KeychainTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainTests.swift; sourceTree = "<group>"; };
 		03CE7DE21B62C3B6004A380C /* CawBoxKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CawBoxKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		03CE7DE61B62C3B6004A380C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03CE7DE71B62C3B6004A380C /* CawBoxKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CawBoxKit.h; sourceTree = "<group>"; };
@@ -102,6 +107,7 @@
 			children = (
 				03CE7DF41B62C3B6004A380C /* CawBoxKitTests.swift */,
 				033A92FD1B62CC82003A5AEE /* UIColorTests.swift */,
+				033A93041B62DDF6003A5AEE /* KeychainTests.swift */,
 				03CE7DF21B62C3B6004A380C /* Supporting Files */,
 			);
 			path = CawBoxKitTests;
@@ -121,6 +127,7 @@
 				03CE7DFF1B62C3F7004A380C /* String.swift */,
 				03CE7E011B62C911004A380C /* Dispatch.swift */,
 				03CE7E031B62CADB004A380C /* UIColor.swift */,
+				033A93021B62D93B003A5AEE /* Keychain.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -233,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03CE7E001B62C3F7004A380C /* String.swift in Sources */,
+				033A93031B62D93B003A5AEE /* Keychain.swift in Sources */,
 				03CE7E041B62CADB004A380C /* UIColor.swift in Sources */,
 				03CE7E021B62C911004A380C /* Dispatch.swift in Sources */,
 			);
@@ -247,6 +255,8 @@
 				03CE7DF51B62C3B6004A380C /* CawBoxKitTests.swift in Sources */,
 				033A92FE1B62CC82003A5AEE /* UIColorTests.swift in Sources */,
 				033A93011B62CD9F003A5AEE /* UIColor.swift in Sources */,
+				033A93051B62DDF6003A5AEE /* KeychainTests.swift in Sources */,
+				033A93061B62DE72003A5AEE /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
