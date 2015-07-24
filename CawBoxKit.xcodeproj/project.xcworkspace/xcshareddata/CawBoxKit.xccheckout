@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>589B0B6A-8BD0-4AAB-AFD7-2BB52FA8000F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CawBoxKit</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>05591319CF59D145A9ADAAE542586BD2F54EF3B7</key>
+		<string>https://github.com/brocktonpoint/CawBoxKit.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>CawBoxKit.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>05591319CF59D145A9ADAAE542586BD2F54EF3B7</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/brocktonpoint/CawBoxKit.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>05591319CF59D145A9ADAAE542586BD2F54EF3B7</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>05591319CF59D145A9ADAAE542586BD2F54EF3B7</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CawBoxKit</string>
+		</dict>
+	</array>
+</dict>
+</plist>
