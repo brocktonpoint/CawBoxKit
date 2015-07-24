@@ -25,7 +25,7 @@ SOFTWARE.
 import Foundation
 
 extension String {
-    subscript (range: NSRange) -> String? {
+    public subscript (range: NSRange) -> String? {
         let substringRange = Range<String.Index> (
             start: advance (startIndex, range.location),
             end: advance (startIndex, range.location + range.length)
