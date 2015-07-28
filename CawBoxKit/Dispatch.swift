@@ -28,7 +28,7 @@ public typealias Semaphore = dispatch_semaphore_t
 
 extension Semaphore
 {
-    public class func create () -> Semaphore {
+    public static func create () -> Semaphore {
         return dispatch_semaphore_create (0)
     }
     
@@ -39,36 +39,36 @@ extension Semaphore
         dispatch_semaphore_signal (self)
     }
     
-    public class func asyncAndWait (process: () -> Void) {
-        let semaphore = self.create ()
+    public static func asyncAndWait (process: () -> Void) {
+        //let semaphore = self.create ()
         
-        Dispatch.high.async {
-            process ()
+        //dispatch_queue_t.high.async {
+        //    process ()
             
-            semaphore.unlock ()
-        }
-        semaphore.lock ()
+        //    semaphore.unlock ()
+        //}
+        //semaphore.lock ()
     }
 }
 
 public typealias Dispatch = dispatch_queue_t
 
-extension Dispatch
+extension dispatch_queue_t
 {
-    public class var ui: Dispatch {
+    public static var ui: Dispatch {
         return dispatch_get_main_queue ()
     }
     
-    public class var low: Dispatch {
+    public static var low: Dispatch {
         return dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_LOW, 0)
     }
-    public class var regular: Dispatch {
+    public static var regular: Dispatch {
         return dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
     }
-    public class var high: Dispatch {
+    public static var high: Dispatch {
         return dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_HIGH, 0)
     }
-    public class var background: Dispatch {
+    public static var background: Dispatch {
         return dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)
     }
     

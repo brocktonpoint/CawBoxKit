@@ -63,7 +63,9 @@ public struct KeychainTransaction {
                 kSecMatchLimitOne
             ]
         )
-        if SecItemCopyMatching (query, &results) == noErr {
+        
+        let status = withUnsafeMutablePointer(&results) { SecItemCopyMatching(query, UnsafeMutablePointer($0)) }
+        if status == noErr {
             if let data = results?.takeUnretainedValue() as? NSData {
                 return data
             }

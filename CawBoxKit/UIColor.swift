@@ -38,7 +38,7 @@ extension UIColor
     
     public convenience init (hex: String) {
         var correctedString = hex.stringByTrimmingCharactersInSet (NSCharacterSet.alphanumericCharacterSet().invertedSet)
-        if count (correctedString) == 6 {
+        if correctedString.characters.count == 6 {
             correctedString += "FF"
         }
         
@@ -54,10 +54,6 @@ extension UIColor
             alpha: CGFloat (result & 0x000000FF) / 255.0
         )
     }
-}
-
-extension UIColor: Equatable {
-    
 }
 
 public func ==(lhs: UIColor, rhs: UIColor) -> Bool {
