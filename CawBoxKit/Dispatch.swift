@@ -25,8 +25,41 @@ SOFTWARE.
 import Foundation
 
 public typealias Semaphore = dispatch_semaphore_t
+public typealias Dispatch = dispatch_queue_t
 
-extension Semaphore
+public enum DispatchPriority {
+    case UI
+    case Low
+    case Default
+    case High
+    case Background
+}
+
+public func GetDispatch (priority: DispatchPriority) -> Dispatch {
+    switch priority {
+    case .UI:
+        return dispatch_get_main_queue()
+    case .Low:
+        return dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_LOW, 0)
+    case .Default:
+        return dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+    case .High:
+        return dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_HIGH, 0)
+    case .Background:
+        return dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)
+    }
+}
+public extension Dispatch
+{
+    public func async (block: dispatch_block_t) {
+        dispatch_async (self, block)
+    }
+    
+    public func after (seconds: Double, block: dispatch_block_t) {
+        dispatch_after (dispatch_time(DISPATCH_TIME_NOW, Int64(seconds * Double(NSEC_PER_SEC))), self, block)
+    }
+}
+public extension Semaphore
 {
     public static func create () -> Semaphore {
         return dispatch_semaphore_create (0)
@@ -40,43 +73,13 @@ extension Semaphore
     }
     
     public static func asyncAndWait (process: () -> Void) {
-        //let semaphore = self.create ()
+        let semaphore = self.create ()
         
-        //dispatch_queue_t.high.async {
-        //    process ()
+        GetDispatch (.High).async {
+            process ()
             
-        //    semaphore.unlock ()
-        //}
-        //semaphore.lock ()
-    }
-}
-
-public typealias Dispatch = dispatch_queue_t
-
-extension dispatch_queue_t
-{
-    public static var ui: Dispatch {
-        return dispatch_get_main_queue ()
-    }
-    
-    public static var low: Dispatch {
-        return dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_LOW, 0)
-    }
-    public static var regular: Dispatch {
-        return dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-    }
-    public static var high: Dispatch {
-        return dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_HIGH, 0)
-    }
-    public static var background: Dispatch {
-        return dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)
-    }
-    
-    public func async (block: dispatch_block_t) {
-        dispatch_async (self, block)
-    }
-    
-    public func after (seconds: Double, block: dispatch_block_t) {
-        dispatch_after (dispatch_time(DISPATCH_TIME_NOW, Int64(seconds * Double(NSEC_PER_SEC))), self, block)
+            semaphore.unlock ()
+        }
+        semaphore.lock ()
     }
 }
