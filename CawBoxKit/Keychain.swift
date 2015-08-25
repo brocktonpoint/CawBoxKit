@@ -48,19 +48,12 @@ public struct KeychainTransaction {
     
     public var data: NSData? {
         var results: Unmanaged<AnyObject>?
-        let query = NSDictionary (
-            objects: [
-                request.classType,
-                service,
-                attribute,
-                kCFBooleanTrue,
-                kCFBooleanTrue
-            ], forKeys: [
-                kSecClass,
-                kSecAttrService,
-                kSecAttrAccount,
-                kSecReturnData,
-                kSecMatchLimitOne
+            
+        let query = NSDictionary(dictionary: [
+            kSecClass: request.classType,
+            kSecAttrService: service,
+            kSecReturnData: kCFBooleanTrue,
+            kSecMatchLimitOne: kCFBooleanTrue
             ]
         )
         
@@ -78,17 +71,12 @@ public struct KeychainTransaction {
         delete ()
         
         if let data = value {
-            let query = NSDictionary (
-                objects: [
-                    request.classType,
-                    service,
-                    attribute,
-                    data
-                ], forKeys: [
-                    kSecClass,
-                    kSecAttrService,
-                    kSecAttrAccount,
-                    kSecValueData]
+            let query = NSDictionary(dictionary: [
+                kSecClass: request.classType,
+                kSecAttrService: service,
+                kSecAttrAccount: attribute,
+                kSecValueData: data
+                ]
             )
             
             return SecItemAdd (query, nil) == noErr
@@ -97,15 +85,10 @@ public struct KeychainTransaction {
         return false
     }
     public func delete () -> Bool {
-        let query = NSDictionary (
-            objects: [
-                request.classType,
-                service,
-                attribute
-            ], forKeys: [
-                kSecClass,
-                kSecAttrService,
-                kSecAttrAccount
+        let query = NSDictionary(dictionary: [
+            kSecClass: request.classType,
+            kSecAttrService: service,
+            kSecAttrAccount: attribute
             ]
         )
         
