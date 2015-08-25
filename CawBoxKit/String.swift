@@ -27,8 +27,8 @@ import Foundation
 extension String {
     public subscript (range: NSRange) -> String? {
         let substringRange = Range<String.Index> (
-            start: advance (startIndex, range.location),
-            end: advance (startIndex, range.location + range.length)
+            start: startIndex.advancedBy (range.location),
+            end: startIndex.advancedBy (range.location + range.length)
         )
         
         return substringWithRange (substringRange)
