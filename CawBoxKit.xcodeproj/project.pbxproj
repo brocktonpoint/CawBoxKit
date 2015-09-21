@@ -16,6 +16,9 @@
 		033A93061B62DE72003A5AEE /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033A93021B62D93B003A5AEE /* Keychain.swift */; };
 		033A930B1B62E353003A5AEE /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033A930A1B62E353003A5AEE /* StringTests.swift */; };
 		033A93101B6723F4003A5AEE /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033A930F1B6723F4003A5AEE /* CoreData.swift */; };
+		0342985F1BAFCD8900CCB416 /* BinaryValueArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0342985E1BAFCD8900CCB416 /* BinaryValueArray.swift */; settings = {ASSET_TAGS = (); }; };
+		034298601BAFCDC200CCB416 /* BinaryValueArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0342985E1BAFCD8900CCB416 /* BinaryValueArray.swift */; settings = {ASSET_TAGS = (); }; };
+		034298621BAFCDD100CCB416 /* BinaryValueArrayTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034298611BAFCDD100CCB416 /* BinaryValueArrayTest.swift */; settings = {ASSET_TAGS = (); }; };
 		03B027D91B9A4FEA00140CB4 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B027D81B9A4FEA00140CB4 /* UserData.swift */; settings = {ASSET_TAGS = (); }; };
 		03B027DB1B9A526900140CB4 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B027D81B9A4FEA00140CB4 /* UserData.swift */; settings = {ASSET_TAGS = (); }; };
 		03B027DD1B9A528600140CB4 /* UserDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B027DC1B9A528600140CB4 /* UserDataTests.swift */; settings = {ASSET_TAGS = (); }; };
@@ -43,6 +46,8 @@
 		033A93041B62DDF6003A5AEE /* KeychainTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainTests.swift; sourceTree = "<group>"; };
 		033A930A1B62E353003A5AEE /* StringTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
 		033A930F1B6723F4003A5AEE /* CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
+		0342985E1BAFCD8900CCB416 /* BinaryValueArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BinaryValueArray.swift; path = CawBoxKitTests/BinaryValueArray.swift; sourceTree = SOURCE_ROOT; };
+		034298611BAFCDD100CCB416 /* BinaryValueArrayTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryValueArrayTest.swift; sourceTree = "<group>"; };
 		03B027D81B9A4FEA00140CB4 /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		03B027DC1B9A528600140CB4 /* UserDataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDataTests.swift; sourceTree = "<group>"; };
 		03CE7DE21B62C3B6004A380C /* CawBoxKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CawBoxKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +132,7 @@
 				033A92FD1B62CC82003A5AEE /* UIColorTests.swift */,
 				033A93041B62DDF6003A5AEE /* KeychainTests.swift */,
 				03B027DC1B9A528600140CB4 /* UserDataTests.swift */,
+				034298611BAFCDD100CCB416 /* BinaryValueArrayTest.swift */,
 				03CE7DF21B62C3B6004A380C /* Supporting Files */,
 			);
 			path = CawBoxKitTests;
@@ -149,6 +155,7 @@
 				03CE7E031B62CADB004A380C /* UIColor.swift */,
 				033A93021B62D93B003A5AEE /* Keychain.swift */,
 				03B027D81B9A4FEA00140CB4 /* UserData.swift */,
+				0342985E1BAFCD8900CCB416 /* BinaryValueArray.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -265,6 +272,7 @@
 				03CE7E001B62C3F7004A380C /* String.swift in Sources */,
 				03B027D91B9A4FEA00140CB4 /* UserData.swift in Sources */,
 				033A93031B62D93B003A5AEE /* Keychain.swift in Sources */,
+				034298601BAFCDC200CCB416 /* BinaryValueArray.swift in Sources */,
 				03CE7E041B62CADB004A380C /* UIColor.swift in Sources */,
 				03CE7E021B62C911004A380C /* Dispatch.swift in Sources */,
 				033A93101B6723F4003A5AEE /* CoreData.swift in Sources */,
@@ -281,10 +289,12 @@
 				03B027DB1B9A526900140CB4 /* UserData.swift in Sources */,
 				033A92FE1B62CC82003A5AEE /* UIColorTests.swift in Sources */,
 				033A93011B62CD9F003A5AEE /* UIColor.swift in Sources */,
+				034298621BAFCDD100CCB416 /* BinaryValueArrayTest.swift in Sources */,
 				033A93051B62DDF6003A5AEE /* KeychainTests.swift in Sources */,
 				033A930B1B62E353003A5AEE /* StringTests.swift in Sources */,
 				03B027DD1B9A528600140CB4 /* UserDataTests.swift in Sources */,
 				033A93061B62DE72003A5AEE /* Keychain.swift in Sources */,
+				0342985F1BAFCD8900CCB416 /* BinaryValueArray.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
