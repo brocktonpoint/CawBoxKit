@@ -24,10 +24,8 @@ SOFTWARE.
 
 import UIKit
 
-extension UIColor
-{
-    public convenience init (RGB red: Int, green: Int, blue: Int, alpha: Int)
-    {
+extension UIColor {
+    public convenience init (RGB red: Int, green: Int, blue: Int, alpha: Int) {
         self.init (
             red: CGFloat(red) / 255,
             green: CGFloat(green) / 255,
