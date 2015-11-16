@@ -48,14 +48,13 @@ public struct KeychainTransaction {
     
     public var data: NSData? {
         var results: Unmanaged<AnyObject>?
-            
-        let query = NSDictionary(dictionary: [
+        
+        let query: [NSString: AnyObject] = [
             kSecClass: request.classType,
             kSecAttrService: service,
             kSecReturnData: kCFBooleanTrue,
             kSecMatchLimitOne: kCFBooleanTrue
-            ]
-        )
+        ]
         
         let status = withUnsafeMutablePointer(&results) { SecItemCopyMatching(query, UnsafeMutablePointer($0)) }
         if status == noErr {
@@ -71,13 +70,12 @@ public struct KeychainTransaction {
         delete ()
         
         if let data = value {
-            let query = NSDictionary(dictionary: [
+            let query: [NSString: AnyObject] = [
                 kSecClass: request.classType,
                 kSecAttrService: service,
                 kSecAttrAccount: attribute,
                 kSecValueData: data
-                ]
-            )
+            ]
             
             return SecItemAdd (query, nil) == noErr
         }
@@ -85,12 +83,11 @@ public struct KeychainTransaction {
         return false
     }
     public func delete () -> Bool {
-        let query = NSDictionary(dictionary: [
+        let query: [NSString: AnyObject] = [
             kSecClass: request.classType,
             kSecAttrService: service,
             kSecAttrAccount: attribute
-            ]
-        )
+        ]
         
         return SecItemDelete (query) == noErr
     }
