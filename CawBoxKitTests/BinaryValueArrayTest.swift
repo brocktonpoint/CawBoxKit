@@ -24,6 +24,7 @@ SOFTWARE.
 
 import XCTest
 import CoreLocation
+@testable import CawBoxKit
 
 class BinaryValueArrayTest: XCTestCase {
     

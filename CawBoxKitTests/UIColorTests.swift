@@ -24,6 +24,7 @@ SOFTWARE.
 
 import UIKit
 import XCTest
+@testable import CawBoxKit
 
 class UIColorTests: XCTestCase {
     func testHexRed () {

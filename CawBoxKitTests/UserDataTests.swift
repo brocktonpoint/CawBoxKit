@@ -23,6 +23,7 @@ SOFTWARE.
 */
 
 import XCTest
+@testable import CawBoxKit
 
 class UserDataTests: XCTestCase {
 
