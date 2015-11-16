@@ -49,8 +49,7 @@ public func GetDispatch (priority: DispatchPriority) -> Dispatch {
         return dispatch_get_global_queue (DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)
     }
 }
-public extension Dispatch
-{
+public extension Dispatch {
     public func async (block: dispatch_block_t) {
         dispatch_async (self, block)
     }
@@ -59,8 +58,7 @@ public extension Dispatch
         dispatch_after (dispatch_time(DISPATCH_TIME_NOW, Int64(seconds * Double(NSEC_PER_SEC))), self, block)
     }
 }
-public extension Semaphore
-{
+public extension Semaphore {
     public static func create () -> Semaphore {
         return dispatch_semaphore_create (0)
     }
