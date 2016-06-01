@@ -26,7 +26,7 @@ import XCTest
 @testable import CawBoxKit
 
 class StringTests: XCTestCase {
-
+/*
     func testNSRangeSubscript () {
         let sourceString = "Here is a string that we will get a portion of."
         let wantedString = "string"
@@ -34,5 +34,5 @@ class StringTests: XCTestCase {
         
         XCTAssert (sourceString[substringRange] == wantedString, "Failed to get correct substring.")
     }
-
+*/
 }

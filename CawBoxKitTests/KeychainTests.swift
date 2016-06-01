@@ -35,8 +35,8 @@ class KeychainTests: XCTestCase {
         )
         
         let stringValue = "Password12345"
-        let dataValue = stringValue.dataUsingEncoding (NSUTF8StringEncoding, allowLossyConversion: false)
-        XCTAssert (transaction.set (dataValue), "Failed to set generic password.")
+        let dataValue = stringValue.data (using: NSUTF8StringEncoding, allowLossyConversion: false)
+        XCTAssert (transaction.set (value: dataValue), "Failed to set generic password.")
         
         let fetchedData = transaction.data
         XCTAssert (dataValue == fetchedData, "Failed to fetch generic password.")

@@ -33,8 +33,8 @@ struct BinaryValueArray <T> {
         }
         
         let resultList = [T] (
-            count: data.length / sizeof(T),
-            repeatedValue: zeroValue
+            repeating: zeroValue,
+            count: data.length / sizeof(T)
         )
         let resultDataPointer = UnsafeMutablePointer<[T]>(resultList)
         data.getBytes (resultDataPointer, length: data.length)

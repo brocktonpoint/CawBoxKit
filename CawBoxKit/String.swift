@@ -25,12 +25,15 @@ SOFTWARE.
 import Foundation
 
 extension String {
+    /*
     public subscript (range: NSRange) -> String? {
+        utf8.startIndex.
+        let v = startIndex.advanced (by: 2)
         let substringRange = Range<String.Index> (
-            start: startIndex.advancedBy (range.location),
+            start: startIndex.advancedBy (n: range.location),
             end: startIndex.advancedBy (range.location + range.length)
         )
         
-        return substringWithRange (substringRange)
-    }
+        return substring (with: substringRange)
+    }*/
 }

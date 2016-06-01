@@ -38,26 +38,26 @@ class UserDataTests: XCTestCase {
         let doubleValue = 0.54321
         
         UserData<AnyObject>.clearAll ()
-        XCTAssert (UserData<String>.get (stringKey) == nil, "String value should be blank. (\(UserData<String>.get (stringKey)))")
-        XCTAssert (UserData<Int>.get (intKey) == nil, "Int value should be blank. (\(UserData<Int>.get (intKey)))")
-        XCTAssert (UserData<Double>.get (doubleKey) == nil, "Double value should be blank. (\(UserData<Double>.get (doubleKey)))")
+        XCTAssert (UserData<String>.get (forKey: stringKey) == nil, "String value should be blank. (\(UserData<String>.get (forKey: stringKey)))")
+        XCTAssert (UserData<Int>.get (forKey: intKey) == nil, "Int value should be blank. (\(UserData<Int>.get (forKey: intKey)))")
+        XCTAssert (UserData<Double>.get (forKey: doubleKey) == nil, "Double value should be blank. (\(UserData<Double>.get (forKey: doubleKey)))")
         
-        UserData<AnyObject>.setDefaults ([
+        UserData<AnyObject>.setDefaults (defaults: [
             stringKey: stringValue,
             intKey: intValue,
             doubleKey: doubleValue
             ]
         )
         
-        XCTAssert (UserData<String>.get (stringKey) == stringValue, "String value incorrect.")
-        XCTAssert (UserData<Int>.get (intKey) == intValue, "Int value incorrect.")
-        XCTAssert (UserData<Double>.get (doubleKey) == doubleValue, "Double value incorrect.")
+        XCTAssert (UserData<String>.get (forKey: stringKey) == stringValue, "String value incorrect.")
+        XCTAssert (UserData<Int>.get (forKey: intKey) == intValue, "Int value incorrect.")
+        XCTAssert (UserData<Double>.get (forKey: doubleKey) == doubleValue, "Double value incorrect.")
         
-        UserData<AnyObject>.clear ([stringKey])
-        XCTAssert (UserData<String>.get (stringKey) == nil, "String value should be blank.")
+        UserData<AnyObject>.clear (keys: [stringKey])
+        XCTAssert (UserData<String>.get (forKey: stringKey) == nil, "String value should be blank.")
         
-        UserData<AnyObject>.set (intKey, value: nil)
-        XCTAssert (UserData<Int>.get (intKey) == nil, "Int value should be blank.")
+        UserData<AnyObject>.set (forKey: intKey, value: nil)
+        XCTAssert (UserData<Int>.get (forKey: intKey) == nil, "Int value should be blank.")
     }
 
 }

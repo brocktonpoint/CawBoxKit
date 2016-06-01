@@ -30,7 +30,7 @@ public enum KeychainRequest {
     case InternetPassword
     case Certificate
     
-    private var classType: CFStringRef {
+    private var classType: CFString {
         switch self {
         case .GenericPassword:
             return kSecClassGenericPassword

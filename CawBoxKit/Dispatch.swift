@@ -73,7 +73,7 @@ public extension Semaphore {
     public static func asyncAndWait (process: () -> Void) {
         let semaphore = self.create ()
         
-        GetDispatch (.High).async {
+        GetDispatch (priority: .High).async {
             process ()
             
             semaphore.unlock ()

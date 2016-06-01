@@ -35,7 +35,7 @@ extension UIColor {
     }
     
     public convenience init (hex: String) {
-        var correctedString = hex.stringByTrimmingCharactersInSet (NSCharacterSet.alphanumericCharacterSet().invertedSet)
+        var correctedString = hex.trimmingCharacters (in: NSCharacterSet.alphanumerics().inverted)
         if correctedString.characters.count == 6 {
             correctedString += "FF"
         }
@@ -43,7 +43,7 @@ extension UIColor {
         let scanner = NSScanner (string: correctedString)
         
         var result: UInt32 = 0
-        scanner.scanHexInt (&result)
+        scanner.scanHexInt32 (&result)
         
         self.init (
             red: CGFloat (result & 0xFF000000) / 255.0,

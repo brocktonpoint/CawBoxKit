@@ -27,18 +27,18 @@ import Foundation
 struct UserData <V> {
     static func setDefaults (defaults: [String: AnyObject]) {
         for (key, value) in defaults {
-            if UserData<AnyObject>.get (key) == nil {
-                UserData<AnyObject>.set (key, value: value)
+            if UserData<AnyObject>.get (forKey: key) == nil {
+                UserData<AnyObject>.set (forKey: key, value: value)
             }
         }
     }
     static func clear (keys: [String]) {
         for key in keys {
-            set (key, value: nil)
+            set (forKey: key, value: nil)
         }
     }
     static func clearAll () {
-        sync ([:])
+        sync (values: [:])
     }
     
     static func get (forKey: String) -> V? {
@@ -50,28 +50,28 @@ struct UserData <V> {
         if let object = value.self {
             localUserData[forKey] = object as? AnyObject
         } else {
-            localUserData.removeValueForKey (forKey)
+            localUserData.removeValue (forKey: forKey)
         }
         
-        sync (localUserData)
+        sync (values: localUserData)
     }
 }
 
 extension UserData {
     private static var userDataURL: NSURL? {
-        let URL = try? NSFileManager.defaultManager().URLForDirectory (
-            .CachesDirectory,
-            inDomain: .UserDomainMask,
-            appropriateForURL: nil,
+        let URL = try? NSFileManager.default().urlForDirectory (
+            .cachesDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
             create: true
         )
         
-        return URL?.URLByAppendingPathComponent ("userDataDefaults")
+        return URL?.appendingPathComponent ("userDataDefaults")
     }
     
     private static var userData: [String: AnyObject] {
-        if let url = userDataURL, let data = NSData(contentsOfURL: url) {
-            if let json = try? NSJSONSerialization.JSONObjectWithData (data, options: .MutableContainers),
+        if let url = userDataURL, let data = NSData (contentsOf: url) {
+            if let json = try? NSJSONSerialization.jsonObject (with: data, options: .mutableContainers),
                 userData = json as? [String: AnyObject]{
                     return userData
             }
@@ -81,8 +81,8 @@ extension UserData {
     }
     
     private static func sync (values: [String: AnyObject]) {
-        if let url = userDataURL, let data = try? NSJSONSerialization.dataWithJSONObject (values, options: .PrettyPrinted) {
-            data.writeToURL (url, atomically: true)
+        if let url = userDataURL, let data = try? NSJSONSerialization.data (withJSONObject: values, options: .prettyPrinted) {
+            data.write (to: url, atomically: true)
         }
     }
 }

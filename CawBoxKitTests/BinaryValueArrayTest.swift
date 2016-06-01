@@ -39,7 +39,7 @@ class BinaryValueArrayTest: XCTestCase {
         let output = BinaryValueArray<CLLocationCoordinate2D> (data: data, zeroValue: kCLLocationCoordinate2DInvalid).results
         
         XCTAssert (input.count == output.count, "Input != Output Count")
-        for (index, location) in input.enumerate () {
+        for (index, location) in input.enumerated () {
             XCTAssert (location.latitude == output[index].latitude && location.longitude == output[index].longitude, "Input[\(index)] != Output[\(index)] Count")
         }
     }

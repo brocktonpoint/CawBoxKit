@@ -28,19 +28,19 @@ import XCTest
 
 class UIColorTests: XCTestCase {
     func testHexRed () {
-        let red = UIColor.redColor ()
+        let red = UIColor.red ()
         let redHex = UIColor (hex: "#FF0000")
         
         XCTAssert (red == redHex, "Failed to create Red from #FF0000")
     }
     func testHexGreen () {
-        let green = UIColor.greenColor ()
+        let green = UIColor.green ()
         let greenHex = UIColor (hex: "#00FF00")
         
         XCTAssert (green == greenHex, "Pass")
     }
     func testHexBlue () {
-        let blue = UIColor.blueColor ()
+        let blue = UIColor.blue ()
         let blueHex = UIColor (hex: "#0000FF")
         
         XCTAssert (blue == blueHex, "Pass")
