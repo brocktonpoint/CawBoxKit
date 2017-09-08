@@ -20,14 +20,10 @@
 		03A5DF911BFAA14300ED0307 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033A930F1B6723F4003A5AEE /* CoreData.swift */; };
 		03A5DF921BFAA14300ED0307 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE7DFF1B62C3F7004A380C /* String.swift */; };
 		03A5DF941BFAA14300ED0307 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033A93021B62D93B003A5AEE /* Keychain.swift */; };
-		03A5DF951BFAA14300ED0307 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B027D81B9A4FEA00140CB4 /* UserData.swift */; };
 		03A5DF961BFAA14300ED0307 /* BinaryValueArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0342985E1BAFCD8900CCB416 /* BinaryValueArray.swift */; };
 		03A5DF971BFAA1C600ED0307 /* BinaryValueArrayTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034298611BAFCDD100CCB416 /* BinaryValueArrayTest.swift */; };
 		03A5DF981BFAA26000ED0307 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033A930A1B62E353003A5AEE /* StringTests.swift */; };
 		03A5DF991BFAA27000ED0307 /* KeychainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033A93041B62DDF6003A5AEE /* KeychainTests.swift */; };
-		03A5DF9A1BFAA27700ED0307 /* UserDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B027DC1B9A528600140CB4 /* UserDataTests.swift */; };
-		03B027D91B9A4FEA00140CB4 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B027D81B9A4FEA00140CB4 /* UserData.swift */; };
-		03B027DD1B9A528600140CB4 /* UserDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B027DC1B9A528600140CB4 /* UserDataTests.swift */; };
 		03CE7DE81B62C3B6004A380C /* CawBoxKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 03CE7DE71B62C3B6004A380C /* CawBoxKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		03CE7DEE1B62C3B6004A380C /* CawBoxKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03CE7DE21B62C3B6004A380C /* CawBoxKit.framework */; };
 		03CE7DF51B62C3B6004A380C /* CawBoxKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CE7DF41B62C3B6004A380C /* CawBoxKitTests.swift */; };
@@ -66,8 +62,6 @@
 		03A5DF831BFAA11D00ED0307 /* CawBoxKit-MacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CawBoxKit-MacTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		03A5DF881BFAA11D00ED0307 /* CawBoxKit_MacTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CawBoxKit_MacTests.swift; sourceTree = "<group>"; };
 		03A5DF8A1BFAA11D00ED0307 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		03B027D81B9A4FEA00140CB4 /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
-		03B027DC1B9A528600140CB4 /* UserDataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDataTests.swift; sourceTree = "<group>"; };
 		03CE7DE21B62C3B6004A380C /* CawBoxKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CawBoxKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		03CE7DE61B62C3B6004A380C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03CE7DE71B62C3B6004A380C /* CawBoxKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CawBoxKit.h; sourceTree = "<group>"; };
@@ -185,7 +179,6 @@
 				033A930A1B62E353003A5AEE /* StringTests.swift */,
 				033A92FD1B62CC82003A5AEE /* UIColorTests.swift */,
 				033A93041B62DDF6003A5AEE /* KeychainTests.swift */,
-				03B027DC1B9A528600140CB4 /* UserDataTests.swift */,
 				034298611BAFCDD100CCB416 /* BinaryValueArrayTest.swift */,
 				03CE7DF21B62C3B6004A380C /* Supporting Files */,
 			);
@@ -207,7 +200,6 @@
 				03CE7DFF1B62C3F7004A380C /* String.swift */,
 				03CE7E031B62CADB004A380C /* UIColor.swift */,
 				033A93021B62D93B003A5AEE /* Keychain.swift */,
-				03B027D81B9A4FEA00140CB4 /* UserData.swift */,
 				0342985E1BAFCD8900CCB416 /* BinaryValueArray.swift */,
 			);
 			name = Extensions;
@@ -393,7 +385,6 @@
 				03A5DF961BFAA14300ED0307 /* BinaryValueArray.swift in Sources */,
 				03A5DF941BFAA14300ED0307 /* Keychain.swift in Sources */,
 				03A5DF921BFAA14300ED0307 /* String.swift in Sources */,
-				03A5DF951BFAA14300ED0307 /* UserData.swift in Sources */,
 				03A5DF911BFAA14300ED0307 /* CoreData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,7 +396,6 @@
 				03A5DF971BFAA1C600ED0307 /* BinaryValueArrayTest.swift in Sources */,
 				03A5DF991BFAA27000ED0307 /* KeychainTests.swift in Sources */,
 				03A5DF981BFAA26000ED0307 /* StringTests.swift in Sources */,
-				03A5DF9A1BFAA27700ED0307 /* UserDataTests.swift in Sources */,
 				03A5DF891BFAA11D00ED0307 /* CawBoxKit_MacTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,7 +405,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				03CE7E001B62C3F7004A380C /* String.swift in Sources */,
-				03B027D91B9A4FEA00140CB4 /* UserData.swift in Sources */,
 				033A93031B62D93B003A5AEE /* Keychain.swift in Sources */,
 				034298601BAFCDC200CCB416 /* BinaryValueArray.swift in Sources */,
 				03CE7E041B62CADB004A380C /* UIColor.swift in Sources */,
@@ -432,7 +421,6 @@
 				034298621BAFCDD100CCB416 /* BinaryValueArrayTest.swift in Sources */,
 				033A93051B62DDF6003A5AEE /* KeychainTests.swift in Sources */,
 				033A930B1B62E353003A5AEE /* StringTests.swift in Sources */,
-				03B027DD1B9A528600140CB4 /* UserDataTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
