@@ -47,7 +47,7 @@ public struct KeychainTransaction {
   public let service: String
   public let attribute: String
 
-  public var data: NSData? {
+  public var data: Data? {
     // var results: Unmanaged<AnyObject>?
 
     let query: [NSString: AnyObject] = [
@@ -71,7 +71,7 @@ public struct KeychainTransaction {
     return nil
   }
 
-  public func set(value: NSData?) -> Bool {
+  public func set(value: Data?) -> Bool {
     // Clear the old value
     _ = delete()
 
@@ -80,7 +80,7 @@ public struct KeychainTransaction {
         kSecClass: request.classTypeName,
         kSecAttrService: service as NSString,
         kSecAttrAccount: attribute as NSString,
-        kSecValueData: data,
+        kSecValueData: data as NSData,
       ]
 
       return SecItemAdd(query as CFDictionary, nil) == noErr
