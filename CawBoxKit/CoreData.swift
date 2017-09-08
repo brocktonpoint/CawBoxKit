@@ -26,22 +26,22 @@ import Foundation
 import CoreData
 
 protocol Fetchable {
-    static var entity: String { get }
-    
-    func fetch (
-        context: NSManagedObjectContext,
-        predicate: NSPredicate?,
-        sort: NSSortDescriptor?,
-        limit: Int?) throws -> [Fetchable]
+  static var entity: String { get }
+
+  func fetch(
+    context: NSManagedObjectContext,
+    predicate: NSPredicate?,
+    sort: NSSortDescriptor?,
+    limit: Int?) throws -> [Fetchable]
 }
 
 extension Fetchable {
-    func fetch (
-        context: NSManagedObjectContext,
-        predicate: NSPredicate? = nil,
-        sort: NSSortDescriptor? = nil,
-        limit: Int? = nil) throws -> [Fetchable] {
-        
-        return []
-    }
+  func fetch(
+    context _: NSManagedObjectContext,
+    predicate _: NSPredicate? = nil,
+    sort _: NSSortDescriptor? = nil,
+    limit _: Int? = nil) throws -> [Fetchable] {
+
+    return []
+  }
 }
