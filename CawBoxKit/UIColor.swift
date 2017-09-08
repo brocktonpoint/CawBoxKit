@@ -57,37 +57,7 @@ extension UIColor {
     let correctedString = hex.trimmingCharacters(in: NSCharacterSet.alphanumerics.inverted)
       .uppercased()
 
-    var currentIndex: String.Index? = correctedString.startIndex
-
-    var values: [CGFloat] = []
-    while currentIndex != nil {
-      guard let index = currentIndex, let nextIndex = correctedString.index(index, offsetBy: 2, limitedBy: correctedString.endIndex) else {
-        break
-      }
-
-      var hexMultiple = 16
-      values.append(correctedString[index ..< nextIndex]
-        .unicodeScalars.reduce(0) { result, scalar in
-          defer {
-            hexMultiple = 1
-          }
-
-          let intScalar = Int(scalar.value)
-          var value = 0
-          switch scalar.value {
-          case 48 ... 57:
-            value = (intScalar - 48)
-          case 65 ... 70:
-            value = (intScalar - 65) + 10
-          default:
-            break
-          }
-
-          return result + CGFloat(value * hexMultiple)
-      })
-
-      currentIndex = nextIndex
-    }
+    let values = UIColor.extractHexValues(from: correctedString)
     guard values.count == type.expectedLength else {
       throw HexError.invalidLength(
         type.expectedLength,
@@ -127,7 +97,46 @@ extension UIColor {
   }
 }
 
-public func ==(lhs: UIColor, rhs: UIColor) -> Bool {
+fileprivate extension UIColor {
+  static func extractHexValues(from: String) -> [CGFloat] {
+    var currentIndex: String.Index? = from.startIndex
+
+    var values: [CGFloat] = []
+    while currentIndex != nil {
+      guard let index = currentIndex,
+        let nextIndex = from.index(index, offsetBy: 2, limitedBy: from.endIndex) else {
+        break
+      }
+
+      var hexMultiple = 16
+      values.append(from[index ..< nextIndex]
+        .unicodeScalars.reduce(0) { result, scalar in
+          defer {
+            hexMultiple = 1
+          }
+
+          let intScalar = Int(scalar.value)
+          var value = 0
+          switch scalar.value {
+          case 48 ... 57:
+            value = (intScalar - 48)
+          case 65 ... 70:
+            value = (intScalar - 65) + 10
+          default:
+            break
+          }
+
+          return result + CGFloat(value * hexMultiple)
+      })
+
+      currentIndex = nextIndex
+    }
+
+    return values
+  }
+}
+
+public func == (lhs: UIColor, rhs: UIColor) -> Bool {
   var lhsRgba = (r: CGFloat(0), g: CGFloat(0), b: CGFloat(0), a: CGFloat(0))
   lhs.getRed(
     &lhsRgba.r,
