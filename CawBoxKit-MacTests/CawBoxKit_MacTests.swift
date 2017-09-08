@@ -25,7 +25,7 @@
 import XCTest
 @testable import CawBoxKit
 
-class CawBoxKit_MacTests: XCTestCase {
+class CawBoxKitMacTests: XCTestCase {
 
   override func setUp() {
     super.setUp()
