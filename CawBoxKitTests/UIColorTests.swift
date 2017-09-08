@@ -29,29 +29,32 @@ import XCTest
 class UIColorTests: XCTestCase {
   func testHexRed() {
     let red = UIColor.red
-    let redHex = UIColor(hex: "#FF0000")
+    let redHex = try? UIColor(hex: "#FF0000")
 
     XCTAssert(red == redHex, "Failed to create Red from #FF0000")
   }
 
   func testHexGreen() {
     let green = UIColor.green
-    let greenHex = UIColor(hex: "#00FF00")
+    let greenHex = try? UIColor(hex: "#00FF00")
 
     XCTAssert(green == greenHex, "Pass")
   }
 
   func testHexBlue() {
     let blue = UIColor.blue
-    let blueHex = UIColor(hex: "#0000FF")
+    let blueHex = try? UIColor(hex: "#0000FF")
 
     XCTAssert(blue == blueHex, "Pass")
   }
 
   func testHexAlpha() {
     let alpha = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
-    let alphaHex = UIColor(hex: "#00000080")
-
-    XCTAssert(alpha == alphaHex, "Pass")
+    do {
+      let alphaHex = try UIColor(hex: "#00000080", type: .rgba)
+      XCTAssert(alpha == alphaHex, "Pass")
+    } catch let error {
+      XCTFail("\(error)")
+    }
   }
 }

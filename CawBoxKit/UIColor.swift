@@ -27,29 +27,101 @@ import UIKit
 extension UIColor {
   public convenience init(RGB red: Int, green: Int, blue: Int, alpha: Int) {
     self.init(
-      red: CGFloat(red) / 255,
-      green: CGFloat(green) / 255,
-      blue: CGFloat(blue) / 255,
-      alpha: CGFloat(alpha) / 255
+      red: CGFloat(min (max(red, 255), 0)) / 255,
+      green: CGFloat(min (max(green, 255), 0)) / 255,
+      blue: CGFloat(min (max(blue, 255), 0)) / 255,
+      alpha: CGFloat(min (max(alpha, 255), 0)) / 255
     )
   }
 
-  public convenience init(hex: String) {
-    var correctedString = hex.trimmingCharacters(in: NSCharacterSet.alphanumerics.inverted)
-    if correctedString.characters.count == 6 {
-      correctedString += "FF"
+  public enum HexError: Error {
+    // .invalidLength (expects, currentLength)
+    case invalidLength (Int, Int)
+  }
+  public enum HexType: String {
+    case rgb
+    case rgba
+    case argb
+
+    var expectedLength: Int {
+      switch self {
+      case .rgb: return 3
+      case .rgba: return 4
+      case .argb: return 4
+      }
+    }
+  }
+
+  public convenience init(hex: String, type: HexType = .rgb) throws {
+    let correctedString = hex.trimmingCharacters(in: NSCharacterSet.alphanumerics.inverted)
+      .uppercased()
+
+    var currentIndex: String.Index? = correctedString.startIndex
+
+    var values: [CGFloat] = []
+    while currentIndex != nil {
+      guard let index = currentIndex, let nextIndex = correctedString.index(index, offsetBy: 2, limitedBy: correctedString.endIndex) else {
+        break
+      }
+
+      var hexMultiple = 16
+      values.append(correctedString[index ..< nextIndex]
+        .unicodeScalars.reduce (0) { result, scalar in
+          defer {
+            hexMultiple = 1
+          }
+
+          let intScalar = Int (scalar.value)
+          var value = 0
+          switch scalar.value {
+          case 48 ... 57:
+            value = (intScalar - 48)
+          case 65 ... 70:
+            value = (intScalar - 65) + 10
+          default:
+            break
+          }
+
+          return result + CGFloat (value * (hexMultiple))
+      })
+
+      currentIndex = nextIndex
+    }
+    guard values.count == type.expectedLength else {
+      throw HexError.invalidLength(
+        type.expectedLength,
+        values.count
+      )
     }
 
-    let scanner = Scanner(string: correctedString)
+    let r: CGFloat
+    let g: CGFloat
+    let b: CGFloat
+    let a: CGFloat
 
-    var result: UInt32 = 0
-    scanner.scanHexInt32(&result)
+    switch type {
+    case .rgb:
+      r = values[0]
+      g = values[1]
+      b = values[2]
+      a = 255
+    case .rgba:
+      r = values[0]
+      g = values[1]
+      b = values[2]
+      a = values[3]
+    case .argb:
+      a = values[0]
+      r = values[1]
+      g = values[2]
+      b = values[3]
+    }
 
     self.init(
-      red: CGFloat(result & 0xFF00_0000) / 255.0,
-      green: CGFloat(result & 0x00FF_0000) / 255.0,
-      blue: CGFloat(result & 0x0000_FF00) / 255.0,
-      alpha: CGFloat(result & 0x0000_00FF) / 255.0
+      red: r / 255.0,
+      green: g / 255.0,
+      blue: b / 255.0,
+      alpha: a / 255.0
     )
   }
 }
