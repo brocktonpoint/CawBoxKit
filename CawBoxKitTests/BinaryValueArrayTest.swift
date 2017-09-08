@@ -42,7 +42,8 @@ class BinaryValueArrayTest: XCTestCase {
 
    XCTAssert(input.count == output.count, "Input != Output Count")
    for (index, location) in input.enumerated() {
-   XCTAssert(location.latitude == output[index].latitude && location.longitude == output[index].longitude, "Input[\(index)] != Output[\(index)] Count")
+   XCTAssert(location.latitude == output[index].latitude &&
+   location.longitude == output[index].longitude, "Input[\(index)] != Output[\(index)] Count")
    }
    }*/
 }
