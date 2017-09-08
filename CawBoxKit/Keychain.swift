@@ -26,17 +26,17 @@ import Foundation
 import Security
 
 public enum KeychainRequest {
-  case GenericPassword
-  case InternetPassword
-  case Certificate
+  case genericPassword
+  case internetPassword
+  case certificate
 
   fileprivate var classTypeName: CFString {
     switch self {
-    case .GenericPassword:
+    case .genericPassword:
       return kSecClassGenericPassword
-    case .InternetPassword:
+    case .internetPassword:
       return kSecClassInternetPassword
-    case .Certificate:
+    case .certificate:
       return kSecClassCertificate
     }
   }

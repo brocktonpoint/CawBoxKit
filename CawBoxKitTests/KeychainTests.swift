@@ -29,7 +29,7 @@ class KeychainTests: XCTestCase {
 
   func testGenericPassword() {
     let transaction = KeychainTransaction(
-      request: .GenericPassword,
+      request: .genericPassword,
       service: "CawBoxKit",
       attribute: "GenericPasswordTest"
     )
