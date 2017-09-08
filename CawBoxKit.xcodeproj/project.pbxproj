@@ -267,6 +267,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 03CE7DF81B62C3B6004A380C /* Build configuration list for PBXNativeTarget "CawBoxKit" */;
 			buildPhases = (
+				03D95E7C1F62368D0092245B /* SwiftLint */,
 				03CE7DDD1B62C3B6004A380C /* Sources */,
 				03CE7DDE1B62C3B6004A380C /* Frameworks */,
 				03CE7DDF1B62C3B6004A380C /* Headers */,
@@ -376,6 +377,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		03D95E7C1F62368D0092245B /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		03A5DF751BFAA11C00ED0307 /* Sources */ = {
