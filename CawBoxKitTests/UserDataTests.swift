@@ -38,14 +38,20 @@ class UserDataTests: XCTestCase {
     let doubleValue = 0.54321
 
     UserData<AnyObject>.clearAll()
-    XCTAssert(UserData<String>.get(forKey: stringKey) == nil, "String value should be blank. (\(UserData<String>.get(forKey: stringKey)))")
-    XCTAssert(UserData<Int>.get(forKey: intKey) == nil, "Int value should be blank. (\(UserData<Int>.get(forKey: intKey)))")
-    XCTAssert(UserData<Double>.get(forKey: doubleKey) == nil, "Double value should be blank. (\(UserData<Double>.get(forKey: doubleKey)))")
+
+    let initialStringValue = UserData<String>.get(forKey: stringKey)
+    XCTAssert(initialStringValue == nil, "String value should be blank. (\(initialStringValue ?? "nil"))")
+
+    let initialIntValue = UserData<Int>.get(forKey: intKey)
+    XCTAssert(initialIntValue == nil, "Int value should be blank. (\(initialIntValue ?? -1)))")
+
+    let initialDoubleValue = UserData<Double>.get(forKey: doubleKey)
+    XCTAssert(initialDoubleValue == nil, "Double value should be blank. (\(initialDoubleValue ?? -1)))")
 
     UserData<AnyObject>.setDefaults(defaults: [
-      stringKey: stringValue,
-      intKey: intValue,
-      doubleKey: doubleValue,
+      stringKey: stringValue as NSString,
+      intKey: intValue as NSNumber,
+      doubleKey: doubleValue as NSNumber,
     ]
     )
 
