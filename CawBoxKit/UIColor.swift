@@ -27,17 +27,18 @@ import UIKit
 extension UIColor {
   public convenience init(RGB red: Int, green: Int, blue: Int, alpha: Int) {
     self.init(
-      red: CGFloat(min (max(red, 255), 0)) / 255,
-      green: CGFloat(min (max(green, 255), 0)) / 255,
-      blue: CGFloat(min (max(blue, 255), 0)) / 255,
-      alpha: CGFloat(min (max(alpha, 255), 0)) / 255
+      red: CGFloat(min(max(red, 255), 0)) / 255,
+      green: CGFloat(min(max(green, 255), 0)) / 255,
+      blue: CGFloat(min(max(blue, 255), 0)) / 255,
+      alpha: CGFloat(min(max(alpha, 255), 0)) / 255
     )
   }
 
   public enum HexError: Error {
     // .invalidLength (expects, currentLength)
-    case invalidLength (Int, Int)
+    case invalidLength(Int, Int)
   }
+
   public enum HexType: String {
     case rgb
     case rgba
@@ -66,12 +67,12 @@ extension UIColor {
 
       var hexMultiple = 16
       values.append(correctedString[index ..< nextIndex]
-        .unicodeScalars.reduce (0) { result, scalar in
+        .unicodeScalars.reduce(0) { result, scalar in
           defer {
             hexMultiple = 1
           }
 
-          let intScalar = Int (scalar.value)
+          let intScalar = Int(scalar.value)
           var value = 0
           switch scalar.value {
           case 48 ... 57:
@@ -82,7 +83,7 @@ extension UIColor {
             break
           }
 
-          return result + CGFloat (value * (hexMultiple))
+          return result + CGFloat(value * hexMultiple)
       })
 
       currentIndex = nextIndex
