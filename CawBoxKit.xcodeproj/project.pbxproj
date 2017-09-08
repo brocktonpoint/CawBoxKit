@@ -406,7 +406,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "swiftformat ${SRCROOT} --indent 2 --commas inline";
+			shellScript = "swiftformat ${SRCROOT} --indent 2";
 		};
 /* End PBXShellScriptBuildPhase section */
 
