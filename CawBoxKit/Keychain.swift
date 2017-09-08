@@ -48,7 +48,7 @@ public struct KeychainTransaction {
   public let attribute: String
 
   public var data: Data? {
-    // var results: Unmanaged<AnyObject>?
+    fatalError("Unimplemented")
 
     let query: [NSString: AnyObject] = [
       kSecClass: request.classTypeName,
@@ -57,16 +57,8 @@ public struct KeychainTransaction {
       kSecMatchLimitOne: kCFBooleanTrue
     ]
 
-    // var results: UnsafeMutablePointer<CFTypeRef?>?
     var output: AnyObject?
     SecItemCopyMatching(query as NSDictionary, &output)
-    /*
-     let status = withUnsafeMutablePointer(to: &results) { SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer($0)) }
-     if status == noErr {
-     if let data = results?.takeUnretainedValue() as? NSData {
-     return data
-     }
-     }*/
 
     return nil
   }
