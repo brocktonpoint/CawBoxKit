@@ -54,7 +54,7 @@ public struct KeychainTransaction {
       kSecClass: request.classTypeName,
       kSecAttrService: service as NSString,
       kSecReturnData: kCFBooleanTrue,
-      kSecMatchLimitOne: kCFBooleanTrue,
+      kSecMatchLimitOne: kCFBooleanTrue
     ]
 
     // var results: UnsafeMutablePointer<CFTypeRef?>?
@@ -80,7 +80,7 @@ public struct KeychainTransaction {
         kSecClass: request.classTypeName,
         kSecAttrService: service as NSString,
         kSecAttrAccount: attribute as NSString,
-        kSecValueData: data as NSData,
+        kSecValueData: data as NSData
       ]
 
       return SecItemAdd(query as CFDictionary, nil) == noErr
@@ -93,7 +93,7 @@ public struct KeychainTransaction {
     let query: [NSString: AnyObject] = [
       kSecClass: request.classTypeName,
       kSecAttrService: service as NSString,
-      kSecAttrAccount: attribute as NSString,
+      kSecAttrAccount: attribute as NSString
     ]
 
     return SecItemDelete(query as CFDictionary) == noErr
