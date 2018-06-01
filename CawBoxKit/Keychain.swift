@@ -26,68 +26,68 @@ import Foundation
 import Security
 
 public enum KeychainRequest {
-  case genericPassword
-  case internetPassword
-  case certificate
+    case genericPassword
+    case internetPassword
+    case certificate
 
-  fileprivate var classTypeName: CFString {
-    switch self {
-    case .genericPassword:
-      return kSecClassGenericPassword
-    case .internetPassword:
-      return kSecClassInternetPassword
-    case .certificate:
-      return kSecClassCertificate
+    fileprivate var classTypeName: CFString {
+        switch self {
+        case .genericPassword:
+            return kSecClassGenericPassword
+        case .internetPassword:
+            return kSecClassInternetPassword
+        case .certificate:
+            return kSecClassCertificate
+        }
     }
-  }
 }
 
 public struct KeychainTransaction {
-  public let request: KeychainRequest
-  public let service: String
-  public let attribute: String
+    public let request: KeychainRequest
+    public let service: String
+    public let attribute: String
 
-  public var data: Data? {
-    fatalError("Unimplemented")
+    public var data: Data? {
+        fatalError("Unimplemented")
 
-    let query: [NSString: AnyObject] = [
-      kSecClass: request.classTypeName,
-      kSecAttrService: service as NSString,
-      kSecReturnData: kCFBooleanTrue,
-      kSecMatchLimitOne: kCFBooleanTrue,
-    ]
+        let query: [NSString: AnyObject] = [
+            kSecClass: request.classTypeName,
+            kSecAttrService: service as NSString,
+            kSecReturnData: kCFBooleanTrue,
+            kSecMatchLimitOne: kCFBooleanTrue,
+        ]
 
-    var output: AnyObject?
-    SecItemCopyMatching(query as NSDictionary, &output)
+        var output: AnyObject?
+        SecItemCopyMatching(query as NSDictionary, &output)
 
-    return nil
-  }
-
-  public func set(value: Data?) -> Bool {
-    // Clear the old value
-    _ = delete()
-
-    if let data = value {
-      let query: [NSString: AnyObject] = [
-        kSecClass: request.classTypeName,
-        kSecAttrService: service as NSString,
-        kSecAttrAccount: attribute as NSString,
-        kSecValueData: data as NSData,
-      ]
-
-      return SecItemAdd(query as CFDictionary, nil) == noErr
+        return nil
     }
 
-    return false
-  }
+    public func set(value: Data?) -> Bool {
+        // Clear the old value
+        _ = delete()
 
-  public func delete() -> Bool {
-    let query: [NSString: AnyObject] = [
-      kSecClass: request.classTypeName,
-      kSecAttrService: service as NSString,
-      kSecAttrAccount: attribute as NSString,
-    ]
+        if let data = value {
+            let query: [NSString: AnyObject] = [
+                kSecClass: request.classTypeName,
+                kSecAttrService: service as NSString,
+                kSecAttrAccount: attribute as NSString,
+                kSecValueData: data as NSData,
+            ]
 
-    return SecItemDelete(query as CFDictionary) == noErr
-  }
+            return SecItemAdd(query as CFDictionary, nil) == noErr
+        }
+
+        return false
+    }
+
+    public func delete() -> Bool {
+        let query: [NSString: AnyObject] = [
+            kSecClass: request.classTypeName,
+            kSecAttrService: service as NSString,
+            kSecAttrAccount: attribute as NSString,
+        ]
+
+        return SecItemDelete(query as CFDictionary) == noErr
+    }
 }

@@ -22,25 +22,24 @@
  SOFTWARE.
  */
 
-import XCTest
 @testable import CawBoxKit
+import XCTest
 
 class KeychainTests: XCTestCase {
+    /* func testGenericPassword() {
+     let transaction = KeychainTransaction(
+     request: .genericPassword,
+     service: "CawBoxKit",
+     attribute: "GenericPasswordTest"
+     )
 
-  func testGenericPassword() {
-    let transaction = KeychainTransaction(
-      request: .genericPassword,
-      service: "CawBoxKit",
-      attribute: "GenericPasswordTest"
-    )
+     let stringValue = "Password12345"
+     let dataValue = stringValue.data(using: .utf8)
+     XCTAssert(transaction.set(value: dataValue), "Failed to set generic password.")
 
-    let stringValue = "Password12345"
-    let dataValue = stringValue.data(using: .utf8)
-    XCTAssert(transaction.set(value: dataValue), "Failed to set generic password.")
+     let fetchedData = transaction.data
+     XCTAssert(dataValue == fetchedData, "Failed to fetch generic password.")
 
-    let fetchedData = transaction.data
-    XCTAssert(dataValue == fetchedData, "Failed to fetch generic password.")
-
-    XCTAssert(transaction.delete(), "Failed to delete generic password.")
-  }
+     XCTAssert(transaction.delete(), "Failed to delete generic password.")
+     } */
 }

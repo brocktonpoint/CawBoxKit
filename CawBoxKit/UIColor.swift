@@ -25,136 +25,136 @@
 import UIKit
 
 extension UIColor {
-  public convenience init(RGB red: Int, green: Int, blue: Int, alpha: Int) {
-    self.init(
-      red: CGFloat(min(max(red, 255), 0)) / 255,
-      green: CGFloat(min(max(green, 255), 0)) / 255,
-      blue: CGFloat(min(max(blue, 255), 0)) / 255,
-      alpha: CGFloat(min(max(alpha, 255), 0)) / 255
-    )
-  }
-
-  public enum HexError: Error {
-    // .invalidLength (expects, currentLength)
-    case invalidLength(Int, Int)
-  }
-
-  public enum HexType: String {
-    case rgb
-    case rgba
-    case argb
-
-    var expectedLength: Int {
-      switch self {
-      case .rgb: return 3
-      case .rgba: return 4
-      case .argb: return 4
-      }
-    }
-  }
-
-  public convenience init(hex: String, type: HexType = .rgb) throws {
-    let correctedString = hex.trimmingCharacters(in: NSCharacterSet.alphanumerics.inverted)
-      .uppercased()
-
-    let values = UIColor.extractHexValues(from: correctedString)
-    guard values.count == type.expectedLength else {
-      throw HexError.invalidLength(
-        type.expectedLength,
-        values.count
-      )
+    public convenience init(RGB red: Int, green: Int, blue: Int, alpha: Int) {
+        self.init(
+            red: CGFloat(min(max(red, 255), 0)) / 255,
+            green: CGFloat(min(max(green, 255), 0)) / 255,
+            blue: CGFloat(min(max(blue, 255), 0)) / 255,
+            alpha: CGFloat(min(max(alpha, 255), 0)) / 255
+        )
     }
 
-    let r: CGFloat
-    let g: CGFloat
-    let b: CGFloat
-    let a: CGFloat
-
-    switch type {
-    case .rgb:
-      r = values[0]
-      g = values[1]
-      b = values[2]
-      a = 255
-    case .rgba:
-      r = values[0]
-      g = values[1]
-      b = values[2]
-      a = values[3]
-    case .argb:
-      a = values[0]
-      r = values[1]
-      g = values[2]
-      b = values[3]
+    public enum HexError: Error {
+        // .invalidLength (expects, currentLength)
+        case invalidLength(Int, Int)
     }
 
-    self.init(
-      red: r / 255.0,
-      green: g / 255.0,
-      blue: b / 255.0,
-      alpha: a / 255.0
-    )
-  }
+    public enum HexType: String {
+        case rgb
+        case rgba
+        case argb
+
+        var expectedLength: Int {
+            switch self {
+            case .rgb: return 3
+            case .rgba: return 4
+            case .argb: return 4
+            }
+        }
+    }
+
+    public convenience init(hex: String, type: HexType = .rgb) throws {
+        let correctedString = hex.trimmingCharacters(in: NSCharacterSet.alphanumerics.inverted)
+            .uppercased()
+
+        let values = UIColor.extractHexValues(from: correctedString)
+        guard values.count == type.expectedLength else {
+            throw HexError.invalidLength(
+                type.expectedLength,
+                values.count
+            )
+        }
+
+        let red: CGFloat
+        let green: CGFloat
+        let blue: CGFloat
+        let alpha: CGFloat
+
+        switch type {
+        case .rgb:
+            red = values[0]
+            green = values[1]
+            blue = values[2]
+            alpha = 255
+        case .rgba:
+            red = values[0]
+            green = values[1]
+            blue = values[2]
+            alpha = values[3]
+        case .argb:
+            alpha = values[0]
+            red = values[1]
+            green = values[2]
+            blue = values[3]
+        }
+
+        self.init(
+            red: red / 255.0,
+            green: green / 255.0,
+            blue: blue / 255.0,
+            alpha: alpha / 255.0
+        )
+    }
 }
 
 fileprivate extension UIColor {
-  static func extractHexValues(from: String) -> [CGFloat] {
-    var currentIndex: String.Index? = from.startIndex
+    static func extractHexValues(from: String) -> [CGFloat] {
+        var currentIndex: String.Index? = from.startIndex
 
-    var values: [CGFloat] = []
-    while currentIndex != nil {
-      guard let index = currentIndex,
-        let nextIndex = from.index(index, offsetBy: 2, limitedBy: from.endIndex) else {
-        break
-      }
+        var values: [CGFloat] = []
+        while currentIndex != nil {
+            guard let index = currentIndex,
+                let nextIndex = from.index(index, offsetBy: 2, limitedBy: from.endIndex) else {
+                break
+            }
 
-      var hexMultiple = 16
-      values.append(from[index ..< nextIndex]
-        .unicodeScalars.reduce(0) { result, scalar in
-          defer {
-            hexMultiple = 1
-          }
+            var hexMultiple = 16
+            values.append(from[index ..< nextIndex]
+                .unicodeScalars.reduce(0) { result, scalar in
+                    defer {
+                        hexMultiple = 1
+                    }
 
-          let intScalar = Int(scalar.value)
-          var value = 0
-          switch scalar.value {
-          case 48 ... 57:
-            value = (intScalar - 48)
-          case 65 ... 70:
-            value = (intScalar - 65) + 10
-          default:
-            break
-          }
+                    let intScalar = Int(scalar.value)
+                    var value = 0
+                    switch scalar.value {
+                    case 48 ... 57:
+                        value = (intScalar - 48)
+                    case 65 ... 70:
+                        value = (intScalar - 65) + 10
+                    default:
+                        break
+                    }
 
-          return result + CGFloat(value * hexMultiple)
-      })
+                    return result + CGFloat(value * hexMultiple)
+            })
 
-      currentIndex = nextIndex
+            currentIndex = nextIndex
+        }
+
+        return values
     }
-
-    return values
-  }
 }
 
 public func == (lhs: UIColor, rhs: UIColor) -> Bool {
-  var lhsRgba = (r: CGFloat(0), g: CGFloat(0), b: CGFloat(0), a: CGFloat(0))
-  lhs.getRed(
-    &lhsRgba.r,
-    green: &lhsRgba.g,
-    blue: &lhsRgba.b,
-    alpha: &lhsRgba.a
-  )
+    var lhsRgba = (r: CGFloat(0), g: CGFloat(0), b: CGFloat(0), a: CGFloat(0))
+    lhs.getRed(
+        &lhsRgba.r,
+        green: &lhsRgba.g,
+        blue: &lhsRgba.b,
+        alpha: &lhsRgba.a
+    )
 
-  var rhsRgba = (r: CGFloat(0), g: CGFloat(0), b: CGFloat(0), a: CGFloat(0))
-  rhs.getRed(
-    &rhsRgba.r,
-    green: &rhsRgba.g,
-    blue: &rhsRgba.b,
-    alpha: &rhsRgba.a
-  )
+    var rhsRgba = (r: CGFloat(0), g: CGFloat(0), b: CGFloat(0), a: CGFloat(0))
+    rhs.getRed(
+        &rhsRgba.r,
+        green: &rhsRgba.g,
+        blue: &rhsRgba.b,
+        alpha: &rhsRgba.a
+    )
 
-  return round(lhsRgba.r * 255) == round(rhsRgba.r * 255)
-    && round(lhsRgba.g * 255) == round(rhsRgba.g * 255)
-    && round(lhsRgba.b * 255) == round(rhsRgba.b * 255)
-    && round(lhsRgba.a * 255) == round(rhsRgba.a * 255)
+    return round(lhsRgba.r * 255) == round(rhsRgba.r * 255)
+        && round(lhsRgba.g * 255) == round(rhsRgba.g * 255)
+        && round(lhsRgba.b * 255) == round(rhsRgba.b * 255)
+        && round(lhsRgba.a * 255) == round(rhsRgba.a * 255)
 }

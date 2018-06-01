@@ -22,17 +22,17 @@
  SOFTWARE.
  */
 
-import XCTest
 @testable import CawBoxKit
+import XCTest
 
 class StringTests: XCTestCase {
-  /*
-   func testNSRangeSubscript () {
-   let sourceString = "Here is a string that we will get a portion of."
-   let wantedString = "string"
-   let substringRange = NSRange (location: 10, length: wantedString.characters.count)
+    /*
+     func testNSRangeSubscript () {
+     let sourceString = "Here is a string that we will get a portion of."
+     let wantedString = "string"
+     let substringRange = NSRange (location: 10, length: wantedString.characters.count)
 
-   XCTAssert (sourceString[substringRange] == wantedString, "Failed to get correct substring.")
-   }
-   */
+     XCTAssert (sourceString[substringRange] == wantedString, "Failed to get correct substring.")
+     }
+     */
 }
