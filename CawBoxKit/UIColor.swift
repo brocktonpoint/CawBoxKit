@@ -1,78 +1,160 @@
 /*
-The MIT License (MIT)
+ The MIT License (MIT)
 
-Copyright (c) 2015 CawBox
+ Copyright (c) 2017 CawBox
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+ */
 
 import UIKit
 
 extension UIColor {
-    public convenience init (RGB red: Int, green: Int, blue: Int, alpha: Int) {
-        self.init (
-            red: CGFloat(red) / 255,
-            green: CGFloat(green) / 255,
-            blue: CGFloat(blue) / 255,
-            alpha: CGFloat(alpha) / 255
+    public convenience init(RGB red: Int, green: Int, blue: Int, alpha: Int) {
+        self.init(
+            red: CGFloat(min(max(red, 255), 0)) / 255,
+            green: CGFloat(min(max(green, 255), 0)) / 255,
+            blue: CGFloat(min(max(blue, 255), 0)) / 255,
+            alpha: CGFloat(min(max(alpha, 255), 0)) / 255
         )
     }
-    
-    public convenience init (hex: String) {
-        var correctedString = hex.trimmingCharacters (in: NSCharacterSet.alphanumerics().inverted)
-        if correctedString.characters.count == 6 {
-            correctedString += "FF"
+
+    public enum HexError: Error {
+        // .invalidLength (expects, currentLength)
+        case invalidLength(Int, Int)
+    }
+
+    public enum HexType: String {
+        case rgb
+        case rgba
+        case argb
+
+        var expectedLength: Int {
+            switch self {
+            case .rgb: return 3
+            case .rgba: return 4
+            case .argb: return 4
+            }
         }
-        
-        let scanner = NSScanner (string: correctedString)
-        
-        var result: UInt32 = 0
-        scanner.scanHexInt32 (&result)
-        
-        self.init (
-            red: CGFloat (result & 0xFF000000) / 255.0,
-            green: CGFloat (result & 0x00FF0000) / 255.0,
-            blue: CGFloat (result & 0x0000FF00) / 255.0,
-            alpha: CGFloat (result & 0x000000FF) / 255.0
+    }
+
+    public convenience init(hex: String, type: HexType = .rgb) throws {
+        let correctedString = hex.trimmingCharacters(in: NSCharacterSet.alphanumerics.inverted)
+            .uppercased()
+
+        let values = UIColor.extractHexValues(from: correctedString)
+        guard values.count == type.expectedLength else {
+            throw HexError.invalidLength(
+                type.expectedLength,
+                values.count
+            )
+        }
+
+        let red: CGFloat
+        let green: CGFloat
+        let blue: CGFloat
+        let alpha: CGFloat
+
+        switch type {
+        case .rgb:
+            red = values[0]
+            green = values[1]
+            blue = values[2]
+            alpha = 255
+        case .rgba:
+            red = values[0]
+            green = values[1]
+            blue = values[2]
+            alpha = values[3]
+        case .argb:
+            alpha = values[0]
+            red = values[1]
+            green = values[2]
+            blue = values[3]
+        }
+
+        self.init(
+            red: red / 255.0,
+            green: green / 255.0,
+            blue: blue / 255.0,
+            alpha: alpha / 255.0
         )
     }
 }
 
-public func ==(lhs: UIColor, rhs: UIColor) -> Bool {
-    var lhsRgba = (r: CGFloat (0), g: CGFloat (0), b: CGFloat (0), a: CGFloat (0))
-    lhs.getRed (
+fileprivate extension UIColor {
+    static func extractHexValues(from: String) -> [CGFloat] {
+        var currentIndex: String.Index? = from.startIndex
+
+        var values: [CGFloat] = []
+        while currentIndex != nil {
+            guard let index = currentIndex,
+                let nextIndex = from.index(index, offsetBy: 2, limitedBy: from.endIndex) else {
+                break
+            }
+
+            var hexMultiple = 16
+            values.append(from[index ..< nextIndex]
+                .unicodeScalars.reduce(0) { result, scalar in
+                    defer {
+                        hexMultiple = 1
+                    }
+
+                    let intScalar = Int(scalar.value)
+                    var value = 0
+                    switch scalar.value {
+                    case 48 ... 57:
+                        value = (intScalar - 48)
+                    case 65 ... 70:
+                        value = (intScalar - 65) + 10
+                    default:
+                        break
+                    }
+
+                    return result + CGFloat(value * hexMultiple)
+            })
+
+            currentIndex = nextIndex
+        }
+
+        return values
+    }
+}
+
+public func == (lhs: UIColor, rhs: UIColor) -> Bool {
+    var lhsRgba = (r: CGFloat(0), g: CGFloat(0), b: CGFloat(0), a: CGFloat(0))
+    lhs.getRed(
         &lhsRgba.r,
         green: &lhsRgba.g,
         blue: &lhsRgba.b,
         alpha: &lhsRgba.a
     )
-    
-    var rhsRgba = (r: CGFloat (0), g: CGFloat (0), b: CGFloat (0), a: CGFloat (0))
-    rhs.getRed (
+
+    var rhsRgba = (r: CGFloat(0), g: CGFloat(0), b: CGFloat(0), a: CGFloat(0))
+    rhs.getRed(
         &rhsRgba.r,
         green: &rhsRgba.g,
         blue: &rhsRgba.b,
         alpha: &rhsRgba.a
     )
-    
-    return round (lhsRgba.r * 255) == round (rhsRgba.r * 255)
-        && round (lhsRgba.g * 255) == round (rhsRgba.g * 255)
-        && round (lhsRgba.b * 255) == round (rhsRgba.b * 255)
-        && round (lhsRgba.a * 255) == round (rhsRgba.a * 255)
+
+    return round(lhsRgba.r * 255) == round(rhsRgba.r * 255)
+        && round(lhsRgba.g * 255) == round(rhsRgba.g * 255)
+        && round(lhsRgba.b * 255) == round(rhsRgba.b * 255)
+        && round(lhsRgba.a * 255) == round(rhsRgba.a * 255)
 }
